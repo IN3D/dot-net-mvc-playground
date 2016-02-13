@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using WebAPIApplication.Models;
 
 namespace WebAPIApplication.Controllers
-{
+{   
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get()    
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public String Get(int id)
         {
-            string idString = id.ToString();
-            return "value " + idString;
+            return id.ToString();
         }
 
         // POST api/values
