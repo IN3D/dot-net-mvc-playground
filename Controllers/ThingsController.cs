@@ -16,14 +16,14 @@ namespace WebAPIApplication.Controllers
             new Thing { id = 3, name = "cat", category = "animal" },
             new Thing { id = 4, name = "python", category = "animal" }
         };
-        
+
         // GET: api/things
         [HttpGet]
         public IEnumerable<Thing> Get()
         {
             return things;
         }
-        
+
         // GET api/things/4
         [HttpGet("{id}")]
         public Object Get(int id)
