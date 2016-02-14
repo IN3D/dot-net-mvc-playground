@@ -10,7 +10,9 @@ namespace WebAPIApplication.Controllers
     public class ThingsController: Controller
     {
         private readonly ThingsRepository _repo;
-        // defaults
+        // Some default static data, a Thing class can
+        // be made with an object literal, and it doesn't have
+        // to come from the DB.
         Thing[] things = new Thing[]
         {
             new Thing { id = 1, name = "wat", category = "question" },
@@ -21,6 +23,7 @@ namespace WebAPIApplication.Controllers
         
         public ThingsController(ThingsRepository repo)
         {
+            // Creates the Thing repository object
             _repo = repo;
         }
 
@@ -28,16 +31,19 @@ namespace WebAPIApplication.Controllers
         [HttpGet]
         public IEnumerable<Thing> Get()
         {
+            // Uses the table object in the repository to call the GetAll() method
             return _repo.GetAll();
         }
 
         // GET api/things/4
+        // Returns an object, as opposed to thing, so that an error Object can be returned.
         [HttpGet("{id}")]
         public Object Get(int id)
         {
             if(id >= things.Length)
             {
                 Response.StatusCode = 400;
+                // returns an object literal
                 return new { error = "Invalid index" };
             }
             else
