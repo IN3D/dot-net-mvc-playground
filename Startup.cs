@@ -7,6 +7,8 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Data.Entity;
+using WebAPIApplication.Repositories;
 
 namespace WebAPIApplication
 {
@@ -26,8 +28,14 @@ namespace WebAPIApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = "Data Source=/home/eric/Playground/AspTests/WebAPIApplication/testDb";
             // Add framework services.
+            services.AddEntityFramework()
+                    .AddSqlite()
+                    .AddDbContext<Tables.ThingContext>(options => options.UseSqlite(connection));
+            
             services.AddMvc();
+            services.AddScoped<ThingsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

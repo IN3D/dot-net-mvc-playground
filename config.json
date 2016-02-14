@@ -1,0 +1,5 @@
+{
+    "Production": {
+        "SqliteConnectionString": "Data Source=/home/eric/Playground/AspTests/WebAPIApplication/testDb"
+    }
+}

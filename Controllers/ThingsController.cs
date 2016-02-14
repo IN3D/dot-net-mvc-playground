@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 using WebAPIApplication.Models;
+using WebAPIApplication.Tables;
+using WebAPIApplication.Repositories;
 
 namespace WebAPIApplication.Controllers
 {
     [Route("api/[controller]")]
     public class ThingsController: Controller
     {
+        private readonly ThingsRepository _repo;
         // defaults
         Thing[] things = new Thing[]
         {
@@ -16,12 +19,17 @@ namespace WebAPIApplication.Controllers
             new Thing { id = 3, name = "cat", category = "animal" },
             new Thing { id = 4, name = "python", category = "animal" }
         };
+        
+        public ThingsController(ThingsRepository repo)
+        {
+            _repo = repo;
+        }
 
         // GET: api/things
         [HttpGet]
         public IEnumerable<Thing> Get()
         {
-            return things;
+            return _repo.GetAll();
         }
 
         // GET api/things/4
